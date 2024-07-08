@@ -1,0 +1,3 @@
+[submodule "liblineage"]
+	path = liblineage
+	url = https://github.com/Dhina17/liblineage
