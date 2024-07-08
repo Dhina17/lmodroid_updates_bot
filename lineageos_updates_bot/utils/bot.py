@@ -35,7 +35,7 @@ class LineageOSUpdatesBot:
 		self.commands = [
 			(k, v) for k, v in {
 				"device_info": "Get device informations and specs",
-				"lineageos": "Get the latest LineageOS build for a device",
+				"lmodroid": "Get the latest LMODroid build for a device",
 				"when": "Get when the next update for a device will be available",
 			}.items()
 		]
@@ -61,8 +61,8 @@ class LineageOSUpdatesBot:
 		# Add handlers
 		self.application.add_handler(CommandHandler(["start"], self.start))
 		self.application.add_handler(CommandHandler(["device_info"], self.device_info))
-		self.application.add_handler(CommandHandler(["lineageos"], self.lineageos))
-		self.application.add_handler(CommandHandler(["lineageos_updates"], self.lineageos_updates))
+		self.application.add_handler(CommandHandler(["lmodroid"], self.lineageos))
+		self.application.add_handler(CommandHandler(["lmodroid_updates"], self.lineageos_updates))
 		self.application.add_handler(CommandHandler(["when"], self.when))
 
 		self.application.add_error_handler(error_handler)
@@ -108,7 +108,7 @@ class LineageOSUpdatesBot:
 		if not update.message:
 			return
 
-		await update.message.reply_text("LineageOS updates bot up and running")
+		await update.message.reply_text("LMODroid updates bot up and running")
 
 	async def device_info(self, update: Update, context: CallbackContext):
 		if not update.message:
@@ -172,7 +172,7 @@ class LineageOSUpdatesBot:
 			return
 		
 		if not device_info.versions:
-			await update.message.reply_text(f"No LineageOS versions found for {codename}")
+			await update.message.reply_text(f"No LMODroid versions found for {codename}")
 			return
 
 		builds = await AsyncV2Api.get_device_builds(codename)
@@ -189,7 +189,7 @@ class LineageOSUpdatesBot:
 			f"Last build for {escape_markdown(device_info.oem, 2)} {escape_markdown(device_info.name, 2)} {escape_markdown(f'({codename})', 2)}:\n"
 			f"Date: {escape_markdown(last_update.date, 2)}\n"
 			f"Type: {escape_markdown(last_update.build_type, 2)}\n"
-			f"OS patch level: `{escape_markdown(last_update.os_patch_level, 2)}`\n"
+			#f"OS patch level: `{escape_markdown(last_update.os_patch_level, 2)}`\n"
 			f"Download: [{escape_markdown(last_update.ota_zip.filename, 2)}]({escape_markdown(last_update.ota_zip.url, 2)}) {escape_markdown(f'({naturalsize(last_update.ota_zip.size)})', 2)}\n"
 		)
 
