@@ -36,7 +36,7 @@ class LineageOSUpdatesBot:
 			(k, v) for k, v in {
 				"device_info": "Get device informations and specs",
 				"lmodroid": "Get the latest LMODroid build for a device",
-				"when": "Get when the next update for a device will be available",
+				#"when": "Get when the next update for a device will be available",
 			}.items()
 		]
 
@@ -63,7 +63,7 @@ class LineageOSUpdatesBot:
 		self.application.add_handler(CommandHandler(["device_info"], self.device_info))
 		self.application.add_handler(CommandHandler(["lmodroid"], self.lineageos))
 		self.application.add_handler(CommandHandler(["lmodroid_updates"], self.lineageos_updates))
-		self.application.add_handler(CommandHandler(["when"], self.when))
+		#self.application.add_handler(CommandHandler(["when"], self.when))
 
 		self.application.add_error_handler(error_handler)
 
